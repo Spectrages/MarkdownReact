@@ -1,49 +1,123 @@
-import { Box, Container } from "@mui/material";
-import { useEffect, useState, useRef } from "react";
-import { getAllCharacters } from "../../api/characterApi";
-import Cards from "../../components/cards/cards";
-import classes from './homepage.module.scss'
-import  CustomChart from "../../components/chart/chart";
+import React from "react";
+import Post from "../../components/post/post";
+import classes from './homepage.module.scss';
+import { useEffect, useRef } from "react";
+import { fetchCharacters } from "../../api/characterApi";
+import { Grid, Typography } from "@mui/material";
+import { RootState } from "../../redux/store";
+import { CustomPagination } from "../../pagination/CustomPagination";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import { moveFrame } from "../../scripts/animations/animationFrame";
+import { moveInterval } from "../../scripts/animations/animationInterval";
+
+interface ILocation {
+    name: any;
+}
+
+interface IPers {
+    id: number;
+    name: string;
+    image: string;
+    species: string;
+    gender: string;
+    location: ILocation;
+    episode: string;
+    status: string;
+    type: string;
+    isLoading: boolean;
+
+}
 
 const Homepage = () => {
-    const [pers, setPers] = useState([] as object);
+    const dispatch = useAppDispatch();
+    const data: any = useAppSelector((state: RootState) => state.characters);
+    const isCharactersLoading = data.characters.status === 'loading';
+
+    const squareRefFrame = useRef<HTMLDivElement>(null);
+    const fieldRefFrame = useRef<HTMLElement>(null);
+
+    const squareRefInterval = useRef<HTMLDivElement>(null);
+    const fieldRefInterval = useRef<HTMLElement>(null);
+
+    const handlePageChange = (value: number) => {
+        dispatch(fetchCharacters(value))
+    };
 
     useEffect(() => {
-        getAllCharacters().then(response => setPers(response));
+        moveFrame(
+            squareRefFrame.current,
+            fieldRefFrame.current,
+            2
+        )
+    }, [squareRefFrame, fieldRefFrame]);
+
+    useEffect(() => {
+        moveInterval(
+            squareRefInterval.current,
+            fieldRefInterval.current,
+            2
+        )
+    }, [squareRefInterval, fieldRefInterval])
+
+
+    useEffect(() => {
+        dispatch(fetchCharacters(0));
     }, []);
 
     return (
-        <Box sx={{
-            flexGrow: '1',
-            minHeight: '100vh',
-            marginTop: '8px',
-            marginBottom: '8px',
-        }}>
-            <CustomChart/>
-            <Container sx={{
-                display: 'flex',
-                gap: '15px',
-                flexWrap: 'wrap',
-                justifyContent: 'center'
-            }}>
-
+        <React.Fragment>
+            <Grid
+                container
+                direction="row"
+                justifyContent="center"
+                alignItems="baseline"
+            >
                 <article className={classes.card}>
                     <div className={classes.squareAnim} />
+                    <Typography>SCSS</Typography>
                 </article>
 
-                <article id='article1' className={classes.card}>
-                    <div id="square1" className={classes.square} />
+                <article ref={fieldRefFrame} className={classes.card}>
+                    <div ref={squareRefFrame} className={classes.square} />
+                    <Typography>AnimationFrame</Typography>
                 </article>
 
-                <article className={classes.card}>
-                    <div className={classes.square} />
+                <article ref={fieldRefInterval} className={classes.card}>
+                    <div ref={squareRefInterval} className={classes.square} />
+                    <Typography>TS</Typography>
                 </article>
 
-                <Cards pers={pers} />
-            </Container>
-        </Box>
+                {(isCharactersLoading ? [...Array(20)] : data?.characters?.items?.results).map((obj: IPers, index: number) => {
+                    return isCharactersLoading
+                        ? (<Post key={index} isLoading={true}
+                            id={0}
+                            name={" "}
+                            image={" "}
+                            species={" "}
+                            gender={" "}
+                            location={{ name: " " }}
+                            episode={" "}
+                            status={" "}
+                            type={" "}
+                        />)
+                        : (<Post
+                            key={index}
+                            id={obj.id}
+                            name={obj.name}
+                            image={obj.image}
+                            species={obj.species}
+                            gender={obj.gender}
+                            location={obj?.location?.name}
+                            episode={obj?.episode}
+                            status={obj.status}
+                            type={obj.type}
+                            isLoading={false}
+                        />);
+                })}
+            </Grid>
+            <CustomPagination data={data?.characters?.items?.info || ''} onChange={handlePageChange} />
+        </React.Fragment>
     )
 }
 
 export default Homepage;
-

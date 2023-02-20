@@ -1,25 +1,17 @@
 
-const squareFirst: HTMLElement | null = document?.getElementById('square1');
-const articleWidth: HTMLElement | null = document?.getElementById('article1');
-let direction: string = 'left';
-let i: number = 0;
+let timestamp: number = 0;
+let speed: number = 50;
+let positionX: number = 0;
 
-export const moveInterval = () => {
-  if (squareFirst !== null && articleWidth !== null) {
-    const widthInterval = articleWidth.clientWidth - squareFirst.getBoundingClientRect().width + 20;
-    if (i > widthInterval) {
-      direction = 'right'
-    }
-    else if (i < 0) {
-      direction = 'left'
-    }
-    if (direction === 'left') {
-      squareFirst.style.transform = `translateX(${i}px)`;
-      i++;
-    }
-    else if (direction === 'right') {
-      squareFirst.style.transform = `translateX(${i}px)`;
-      i--;
-    }
+export const moveInterval = (squareRef: HTMLDivElement, fieldRef: HTMLElement, time: number) => {
+  const articleWidth: number = fieldRef?.clientWidth - squareRef?.getBoundingClientRect().width - 10;
+
+  const step = () => {
+    if (!timestamp) timestamp = time;
+    positionX += speed * (timestamp / 100);
+    squareRef.style.transform = `translateX(${positionX}px)`;
+    if (positionX >= articleWidth || positionX <= 0) speed *= -1;
   }
+  const intervalId = setInterval(() => step(), 10);
+  return intervalId;
 };

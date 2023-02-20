@@ -1,7 +1,6 @@
 import { useParams } from "react-router-dom";
-import { useEffect, useMemo, useState } from 'react'
-import { Box, Chip, Paper, Typography } from "@mui/material";
-import styles from './fullPerson.module.scss'
+import { useEffect, useState } from 'react'
+import { Paper, Typography } from "@mui/material";
 import { getOneCharacter } from "../../api/characterApi";
 
 interface IPers {

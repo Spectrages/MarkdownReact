@@ -2,15 +2,17 @@ import { Box } from '@mui/material';
 import Chart from 'chart.js'
 import { useEffect, useState } from 'react';
 
-const getRandomInt = (max: number) => Math.floor(Math.random() * max);
 const getData = () => {
-    let arr = new Array(10);
-    for (let i = 0; i < arr.length; i++) {
-        arr[i] = getRandomInt(1000)
+    let arr = [];
+    let a = 27;
+    while(a !== 1) {
+        arr.push(a)
+        a % 2 === 0 ? 
+        a /= 2 : 
+        a = (a * 3) + 1
     }
     return arr;
 }
-
 
 const CustomChart = () => {
     const [data, setData] = useState([]);
