@@ -1,23 +1,14 @@
 import Grid from "@mui/material/Grid";
-import { useState } from 'react';
+import { SetStateAction, useState } from 'react';
 import { Pagination } from "@mui/material";
-import { createTheme, ThemeProvider } from "@mui/material";
 
 export const CustomPagination = ({ data, onChange }) => {
 
     const [page, setPage] = useState(1);
-    const handleChange = (event, value) => {
+    const handleChange = (event: any, value: SetStateAction<number>) => {
         setPage(value);
         onChange(value);
     };
-
-    const pagination = createTheme({
-        palette: {
-            primary: {
-                main: "#fff",
-            },
-        }
-    });
 
     return (
         <Grid
