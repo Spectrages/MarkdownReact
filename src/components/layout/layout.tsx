@@ -4,15 +4,16 @@ import Footer from '../footer/footer'
 import { Grid } from '@mui/material';
 import Aside from '../aside/aside';
 import MiniDrawer from '../navbar/navbar';
+import classes from './layout.module.scss'
 
 const Layout = () => {
 
     return (
-        <Grid component={'main'} sx={{
+        <Grid className={classes.main} component={'main'} sx={{
             display: 'flex',
             flexDirection: 'row',
         }}>
-            <MiniDrawer />
+            <MiniDrawer/>
             <Grid container spacing={2} sx={{
                     marginLeft: '0px'
                 }}>
@@ -21,7 +22,7 @@ const Layout = () => {
                     <Grid item xs={10}>
                         <Outlet />
                     </Grid>
-                    <Grid item xs={2}>
+                    <Grid component={'aside'} item xs={2}>
                         <Aside />
                     </Grid>
                 </Grid>

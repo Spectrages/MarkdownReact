@@ -26,7 +26,9 @@ interface IPers {
 const Post = (props: IPers) => {
     const navigate = useNavigate();
     return (
-        <Box onClick={() => navigate(`/person/${props.id}`)}
+        <Box
+        component={'article'}
+         onClick={() => navigate(`/person/${props.id}`)}
             sx={{
                 display: 'flex',
                 flexWrap: 'wrap',

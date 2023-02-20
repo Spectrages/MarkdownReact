@@ -5,11 +5,11 @@ import { useEffect, useState } from 'react';
 const getData = () => {
     let arr = [];
     let a = 27;
-    while(a !== 1) {
+    while (a !== 1) {
         arr.push(a)
-        a % 2 === 0 ? 
-        a /= 2 : 
-        a = (a * 3) + 1
+        a % 2 === 0 ?
+            a /= 2 :
+            a = (a * 3) + 1
     }
     return arr;
 }

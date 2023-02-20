@@ -25,10 +25,10 @@ const Aside = () => {
                 flexDirection: 'column',
             }}
         >
-            <MenuPopupState/>
-            <MenuPopupState/>
-            <MenuPopupState/>
-            <CustomInputAutocomplete persons={pers}/>
+            <MenuPopupState />
+            <MenuPopupState />
+            <MenuPopupState />
+            <CustomInputAutocomplete persons={pers} />
         </Box>
     )
 }

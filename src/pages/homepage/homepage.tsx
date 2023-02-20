@@ -9,6 +9,7 @@ import { CustomPagination } from "../../pagination/CustomPagination";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { moveFrame } from "../../scripts/animations/animationFrame";
 import { moveInterval } from "../../scripts/animations/animationInterval";
+import CustomChart from "../../components/chart/chart";
 
 interface ILocation {
     name: any;
@@ -66,6 +67,7 @@ const Homepage = () => {
 
     return (
         <React.Fragment>
+            <CustomChart/>
             <Grid
                 container
                 direction="row"

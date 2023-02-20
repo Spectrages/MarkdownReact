@@ -26,14 +26,16 @@ export default function MiniDrawer() {
     }, [open])
 
     return (
-        <Box sx={{
-            display: 'flex',
-            flexDirection: 'column',
-            minHeight: '100%',
-            minWidth: width,
-            marginRight: '8px',
-            bgcolor: '#36374b',
-        }}>
+        <Box
+            component={'nav'}
+            sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                minHeight: '100%',
+                minWidth: width,
+                marginRight: '8px',
+                bgcolor: '#36374b',
+            }}>
             <IconButton
                 onClick={handleClick}
                 sx={{
