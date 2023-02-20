@@ -2,12 +2,53 @@ import Box from '@mui/material/Box';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import { useEffect, useState } from 'react';
-import { Button, Typography } from '@mui/material';
+import { Button, Typography, useMediaQuery, useTheme } from '@mui/material';
 
 export default function MiniDrawer() {
     const [open, setOpen] = useState(false);
     const [visibility, setVisibility] = useState('hidden');
     const [width, setWidth] = useState('8%');
+    const [height, setHeight] = useState('100%');
+
+    
+    const theme = useTheme();
+    const matchesSM = useMediaQuery(theme.breakpoints.down('sm'));
+    const matchesMD = useMediaQuery(theme.breakpoints.up('md'));
+
+    const dynamicStylesMain = {
+        ...matchesSM && {
+            display: 'flex',
+            flexDirection: 'column',
+            minHeight: width,
+            minWidth: '100%',
+            marginRight: '8px',
+            bgcolor: '#36374b',
+        },
+        ...matchesMD && {
+            display: 'flex',
+            flexDirection: 'column',
+            minHeight: '100%',
+            minWidth: width,
+            marginRight: '8px',
+            bgcolor: '#36374b',
+        },
+    }
+
+    const dynamicStylesSubMain = {
+        ...matchesSM && {
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '16px',
+            visibility: visibility,
+            height: height,
+        },
+        ...matchesMD && {
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '16px',
+            visibility: visibility,
+        },
+    }
 
     const handleClick = () => {
         open ? setOpen(false) : setOpen(true);
@@ -17,6 +58,10 @@ export default function MiniDrawer() {
         open ?
             setWidth('20%') :
             setWidth('8%');
+
+        open ?
+            setHeight('100%') :
+            setHeight('10px');
     }, [open])
 
     useEffect(() => {
@@ -28,14 +73,7 @@ export default function MiniDrawer() {
     return (
         <Box
             component={'nav'}
-            sx={{
-                display: 'flex',
-                flexDirection: 'column',
-                minHeight: '100%',
-                minWidth: width,
-                marginRight: '8px',
-                bgcolor: '#36374b',
-            }}>
+            sx={{ ...dynamicStylesMain }}>
             <IconButton
                 onClick={handleClick}
                 sx={{
@@ -43,12 +81,7 @@ export default function MiniDrawer() {
                 }}>
                 <MenuIcon />
             </IconButton>
-            <Box sx={{
-                display: 'flex',
-                flexDirection: 'column',
-                gap: '16px',
-                visibility: visibility,
-            }}>
+            <Box sx={{ ...dynamicStylesSubMain }}>
                 <Button color='primary' variant="contained">Menu 1</Button>
                 <Button color='primary' variant="contained">Menu 2</Button>
                 <Button color='primary' variant="contained">Menu 3</Button>
