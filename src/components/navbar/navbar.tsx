@@ -22,7 +22,7 @@ export default function MiniDrawer() {
             minHeight: width,
             minWidth: '100%',
             marginRight: '8px',
-            bgcolor: '#36374b',
+            bgcolor: 'white',
         },
         ...matchesMD && {
             display: 'flex',
@@ -30,7 +30,7 @@ export default function MiniDrawer() {
             minHeight: '100%',
             minWidth: width,
             marginRight: '8px',
-            bgcolor: '#36374b',
+            bgcolor: 'white',
         },
     }
 
