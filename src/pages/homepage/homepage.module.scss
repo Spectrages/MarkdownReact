@@ -1,0 +1,54 @@
+@mixin template_square {
+    position: relative;
+    border: 2px solid green;
+    width: 50px;
+    height: 50px;
+    background: lime;
+    left: 0;
+}
+
+.main {
+    display: flex;
+    background-color: #f1e7dc;
+    flex-grow: 1;
+    gap: 15px;
+}
+
+.block {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    min-height: 100vh;
+    padding: 15px;
+}
+
+.card {
+    display: flex;
+    background-color: aliceblue;
+    min-width: 310px;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px;
+    border: 2px solid black;
+    border-radius: 10px;
+
+    &:hover {
+        transition: 0.2s;
+        transform: scale(1.03);
+    }
+}
+
+.squareAnim {
+    @include template_square();
+    animation: block-moving 5s infinite alternate;
+}
+
+.square {
+    @include template_square();
+}
+
+@keyframes block-moving {
+    from { transform: translate 0px; } 
+    to { transform: translateX(250px) } 
+}
