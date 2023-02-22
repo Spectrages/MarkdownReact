@@ -4,6 +4,7 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
+// @ts-ignore
 import { ThemeProvider } from '@emotion/react';
 import { mainTheme } from './theme/theme';
 import { store } from './redux/store';

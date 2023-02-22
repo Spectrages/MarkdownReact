@@ -1,5 +1,6 @@
 import React from "react";
 import Post from "../../components/post/post";
+// @ts-ignore
 import classes from './homepage.module.scss';
 import { useEffect, useRef } from "react";
 import { fetchCharacters } from "../../api/characterApi";

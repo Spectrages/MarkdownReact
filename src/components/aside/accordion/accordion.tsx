@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Accordion, AccordionSummary, Typography, AccordionDetails } from '@mui/material';
 
-export default function MenuPopupState() {
+export default function MenuPopupState(props: any) {
   const [expanded, setExpanded] = React.useState<string | false>(false);
 
   const handleChange =
@@ -16,7 +16,7 @@ export default function MenuPopupState() {
       id="panel1bh-header"
     >
       <Typography sx={{ width: '15%', flexShrink: 0 }}>
-        Menu
+        Menu {props.num}
       </Typography>
     </AccordionSummary>
     <AccordionDetails>

@@ -3,7 +3,7 @@ import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 
-export default function Dropdown() {
+export default function Dropdown(props: any) {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -23,7 +23,7 @@ export default function Dropdown() {
         aria-expanded={open ? 'true' : undefined}
         onClick={handleClick}
       >
-        Dashboard
+        Dashboard {props.num}
       </Button>
       <Menu
         id="demo-positioned-menu"

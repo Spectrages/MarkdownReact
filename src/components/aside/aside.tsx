@@ -40,9 +40,9 @@ const Aside = () => {
         <Box
             sx={{ ...dynamicStylesMain }}
         >
-            <MenuPopupState />
-            <MenuPopupState />
-            <MenuPopupState />
+            <MenuPopupState num={1}/>
+            <MenuPopupState num={2}/>
+            <MenuPopupState num={3}/>
             <CustomInputAutocomplete persons={pers} />
         </Box>
     )

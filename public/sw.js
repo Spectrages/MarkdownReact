@@ -2,6 +2,7 @@ const STATIC_CACHE_NAME = 's-app-v2';
 const DYNAMIC_CACHE_NAME = 'd-app-v2';
 const ASSET_URL = [
     'index.html',
+    'offline.html'
 ];
 
 self.addEventListener('install', async event => {
